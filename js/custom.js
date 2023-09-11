@@ -90,7 +90,7 @@ $(function () {
     //clone 한 것을 넣기
     $('.all__nb').append(NB);
 
-    $('.all__nb--btn').on('click', function () {
+    $('.all__nb--btn').on('click', function (e) {
         $('.all__nb .nb').toggleClass('on');
     })
 
