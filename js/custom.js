@@ -1,7 +1,7 @@
 $(function () {
 
     $('#Main__content').fullpage({
-        anchors: ['main', 'sub01', 'sub02'],
+        anchors: ['mv', 'mc', 'md', 'mb', 'ft'],
         navigation: false,
         css3: false,
         //반응형에서 fullpage 안하기.
@@ -18,16 +18,17 @@ $(function () {
             console.log(lnk, idx);
             // $('.gnb li').eq(idx - 1).addClass('on').siblings().removeClass('on');
             $('.Main__content .section').eq(idx - 1).addClass('on').siblings().removeClass('on');
+            if (idx == 1) {
+                $('#header').removeClass('on')
+            } else {
+                $('#header').addClass('on')
+            }
         },
         onLeave: function (idx, nidx, dir) {
             $('.gnb li').eq(nidx - 1).addClass('on').siblings().removeClass('on');
             console.log(idx, nidx, dir);
 
-            if (dir == 'up') {
-                $('.header').addClass('on')
-            } else {
-                $('.header').removeClass('on')
-            }
+
 
         }
     });
@@ -58,22 +59,40 @@ $(function () {
 
 
 
-    $('.preminu_slide').on('init afterChange', function (e, s, idx) {
-        const current = $('.preminu_slide .slick-current');
+    $('.preminu__slide').on('init afterChange', function (e, s, idx) {
+        const current = $('.preminu__slide .slick-current');
         current.addClass('on').siblings().removeClass('on');
     });
 
 
 
-    $('.preminu_slide').slick({
+    $('.preminu__slide').slick({
         arrows: false,
         slidesToShow: 4,
-        speed: 100,
+        //speed: 100,
         pauseOnHover: false,
         pauseOnFocus: false,
     });
 
 
+    $('.main__premium .arrows .left__arrow').on('click', function () {
+        $('.preminu__slide').slick('slickPrev')
+    });
+    $('.main__premium .arrows .right__arrow').on('click', function () {
+        $('.preminu__slide').slick('slickNext')
+    });
+
+
+    //clone menu
+
+    const NB = $('.gnb .nb').clone();
+    console.log(NB);
+    //clone 한 것을 넣기
+    $('.all__nb').append(NB);
+
+    $('.all__nb--btn').on('click', function () {
+        $('.all__nb .nb').toggleClass('on');
+    })
 
 
 
